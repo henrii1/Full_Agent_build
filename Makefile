@@ -1,8 +1,8 @@
 install:
 	sudo apt update
-	sudo apt install pipx
+	which pipx || sudo apt install -y pipx
 	pipx ensurepath
-	pipx install poetry
+	pipx list | grep poetry || pipx install poetry
 	poetry install --no-root
 
 env:

@@ -1,15 +1,22 @@
 install:
-	pip install --upgrade pip &&\
-		pip install -r requirements.txt
+	sudo apt update
+	sudo apt install pipx
+	pipx ensurepath
+	pipx install poetry
+	poetry install --no-root
+
+env:
+	poetry shell
 
 test:
-	python -m pytest -vv --cov=webapp tests/test_*.py
+	python -m pytest -vv tests/test_*.py
 
 format:	
-	black webapp/*.py tests/*.py
+	black crewai/*.py tests/*.py langchain/*.py llamaindex/*.py app.py
 
 lint:
-	pylint --disable=R,C --extension-pkg-whitelist='pydantic' webapp/main.py --ignore-patterns=tests/test_.*?py  webapp/*.py
+	pylint --disable=R,C --extension-pkg-whitelist='pydantic' app.py --ignore-patterns=tests/test_.*?py  langchain/*.py \
+		llamaindex/*.py crewai/*.py
 
 
 refactor: format lint

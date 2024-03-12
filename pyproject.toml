@@ -20,6 +20,7 @@ llama-index-llms-ollama = "^0.1.2"
 wikipedia = "^1.4.0"
 pypdf = "^4.1.0"
 docarray = "^0.40.0"
+unstructured = "^0.12.6"
 
 
 [tool.pyright]

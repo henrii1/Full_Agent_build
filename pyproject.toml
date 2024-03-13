@@ -21,6 +21,7 @@ wikipedia = "^1.4.0"
 pypdf = "^4.1.0"
 docarray = "^0.40.0"
 unstructured = "^0.12.6"
+dedent = "^0.5"
 
 
 [tool.pyright]

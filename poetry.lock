@@ -698,6 +698,16 @@ files = [
 ]
 
 [[package]]
+name = "dedent"
+version = "0.5"
+description = "Write inline code as easily as it should be"
+optional = false
+python-versions = "*"
+files = [
+    {file = "dedent-0.5.tar.gz", hash = "sha256:2235516b3010d5b7d12b2041cbf4b087f6339922e0ddf9c2cc00511138a8d737"},
+]
+
+[[package]]
 name = "deprecated"
 version = "1.2.14"
 description = "Python @deprecated decorator to deprecate old python classes, functions or methods."
@@ -5138,4 +5148,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10.0,<3.12"
-content-hash = "0dda4268c0a34d605ec40c5d4136e06f1914707751e90b323d15fafb6eb03a78"
+content-hash = "1148239db1a65716609a2416eca2f20fe0f93c83eb33319221dc6b687a9ba50d"

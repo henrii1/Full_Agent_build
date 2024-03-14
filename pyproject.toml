@@ -22,6 +22,7 @@ pypdf = "^4.1.0"
 docarray = "^0.40.0"
 unstructured = "^0.12.6"
 dedent = "^0.5"
+llama-index-embeddings-mistralai = "^0.1.4"
 
 
 [tool.pyright]

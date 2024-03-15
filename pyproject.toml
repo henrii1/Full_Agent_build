@@ -23,6 +23,7 @@ docarray = "^0.40.0"
 unstructured = "^0.12.6"
 dedent = "^0.5"
 llama-index-embeddings-mistralai = "^0.1.4"
+openai = "^1.14.0"
 
 
 [tool.pyright]

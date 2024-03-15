@@ -1,4 +1,5 @@
 import os
+import openai
 import pytest
 
 from langchain_openai import ChatOpenAI
@@ -10,15 +11,12 @@ from langchain.schema.runnable import RunnablePassthrough
 from langchain.agents import AgentExecutor
 from langchain.memory import ConversationBufferMemory
 from langchain.agents.format_scratchpad import format_to_openai_functions
-from dotenv import load_dotenv, find_dotenv
 
 
-from tools.rag_tool import rag_one, rag_two
-from tools.serper_tool import serper_tool
+from langchain_local.tools.rag_tool import rag_one, rag_two
+from langchain_local.tools.serper_tool import serper_tool
 
-_ = load_dotenv(find_dotenv())
+from dotenv import load_dotenv
+load_dotenv()
 
-api_key = os.getenv('OPENAI_API_KEY')
-
-path_one = '/workspaces/Full_Agent_build/cover_docs.pdf'
-path_two = 
+openai.api_key = os.environ.get('OPENAI_API_KEY')

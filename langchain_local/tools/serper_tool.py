@@ -1,18 +1,27 @@
 import os
 import pprint
 
-from langchain_core.tools import Tool
+
+from langchain_core.tools import tool
+from langchain.pydantic_v1 import BaseModel, Field
 from langchain_community.utilities.google_serper import GoogleSerperAPIWrapper
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 
-_ = load_dotenv(find_dotenv())
+load_dotenv()
+os.environ["SERPER_API_KEY"] = os.getenv('SERPER_API_KEY')
 
-serper_api_key = os.getenv('SERPER_API_KEY')
+class SerperTool(BaseModel):
+  query: str = Field(description = "This should be a search query")
 
-search = GoogleSerperAPIWrapper(serper_api_key = serper_api_key)
-
-serper_tool = Tool(
-    name = "Intermediate Answer",
-    func = search.run,
-    description="useful for when you need to ask with search"
-)
+@tool("serper_tool_main", args_schema=SerperTool, return_direct=False)
+def serper_tool(query:str) -> str:
+  """A useful for when you need to ask with search. Very useful when recent or specific information is needed from the web 
+  """
+  search = GoogleSerperAPIWrapper(k=4, type="search")
+  initial_result = search.results(query)
+  result = initial_result['organic']
+  results = ""
+  for r in result:
+    data = f"'Title':{r['title']}\n 'content':{r['snippet']}"
+    results += f"{data}\n\n"
+  return results

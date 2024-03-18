@@ -1,25 +1,26 @@
 import os
+import openai
 
 from langchain.pydantic_v1 import BaseModel, Field
-from langchain_local.tools import BaseTool, StructuredTool, tool
+from langchain_core.tools import tool
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores.docarray import DocArrayInMemorySearch
 from langchain.chains import RetrievalQA
 
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
+load_dotenv()
 
-_ = load_dotenv(find_dotenv())  # reading local files
-
-openai_api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = os.environ.get('OPENAI_API_KEY')
+api_key = os.getenv('OPENAI_API_KEY')
 
 
 class RagTool(BaseModel):
     query: str = Field(description = "This should be a search query")
 
 
-@tool("rag-tool-one", args_schema=RagTool, return_direct=True)
+@tool("rag-tool-one", args_schema=RagTool, return_direct=False)
 def rag_one(query: str) -> str:
     """A tool that retrieves contents that are semantically relevant to the input query from the provided document.
 
@@ -29,15 +30,15 @@ def rag_one(query: str) -> str:
     Returns:
         str: top k amount of retrieved content from the uploaded document. content that are semantically similar to the input query.
     """
-    pdf_file_path = _ #placehloder code from html, the path to pdf file
-    
+    pdf_file_path = #'/content/data/cover_docs.pdf'
+
     loader = PyPDFLoader(pdf_file_path)
     pages = loader.load_and_split()
 
     text_splitter = RecursiveCharacterTextSplitter()
     splits = text_splitter.split_documents(pages)
 
-    embedding = OpenAIEmbeddings(api_key = openai_api_key)
+    embedding = OpenAIEmbeddings(api_key = api_key)
 
     vectordb = DocArrayInMemorySearch.from_documents(splits, embedding)
 
@@ -51,7 +52,7 @@ def rag_one(query: str) -> str:
 
 """The second RAG tool"""
 
-@tool("rag-tool-two", args_schema=RagTool, return_direct=True)
+@tool("rag-tool-two", args_schema=RagTool, return_direct=False)
 def rag_two(query: str) -> str:
     """A tool that retrieves contents that are semantically relevant to the input query from the provided document.
 
@@ -61,15 +62,15 @@ def rag_two(query: str) -> str:
     Returns:
         str: top k amount of retrieved content from the uploaded document. content that are semantically similar to the input query.
     """
-    pdf_file_path = _ #placehloder code from html, the path to pdf file
-    
+    pdf_file_path = #'/content/data/ptdf_sop.pdf'
+
     loader = PyPDFLoader(pdf_file_path)
     pages = loader.load_and_split()
 
     text_splitter = RecursiveCharacterTextSplitter()
     splits = text_splitter.split_documents(pages)
 
-    embedding = OpenAIEmbeddings(api_key = openai_api_key)
+    embedding = OpenAIEmbeddings(api_key = api_key)
 
     vectordb = DocArrayInMemorySearch.from_documents(splits, embedding)
 

@@ -4,7 +4,7 @@ from langchain_community.chat_models import ChatOllama
 from tools.browser_tools import BrowserTools
 from tools.calculator_tools import CalculatorTools
 from tools.search_tools import SearchTools
-from langchain_local.tools import serper_tool
+from langchain_folder.tools import serper_tool
 
 
 

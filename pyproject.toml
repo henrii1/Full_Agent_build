@@ -20,10 +20,13 @@ llama-index-llms-ollama = "^0.1.2"
 wikipedia = "^1.4.0"
 pypdf = "^4.1.0"
 docarray = "^0.40.0"
-unstructured = "^0.12.6"
 dedent = "^0.5"
 llama-index-embeddings-mistralai = "^0.1.4"
 openai = "^1.14.0"
+chainlit = "^1.0.401"
+unstructured = "^0.11.0"
+streamlit = "^1.32.2"
+reportlab = "^4.1.0"
 
 
 [tool.pyright]

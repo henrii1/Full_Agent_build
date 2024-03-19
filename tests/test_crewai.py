@@ -5,7 +5,7 @@ from crewai_local.trip_crew import TripCrew
 
 from crewai import Crew, Process
 from textwrap import dedent
-from langchain_community.chat_models import ChatOllama
+#from langchain_community.chat_models import ChatOllama
 from langchain_openai import ChatOpenAI
 from crewai_local.trip_agents import TripAgents
 from crewai_local.trip_task import TripTasks
@@ -13,7 +13,7 @@ from crewai_local.trip_task import TripTasks
 from dotenv import load_dotenv
 load_dotenv()
 
-openai.api_key = os.environ.get('OPENAI_API_KEY')
+os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 
 
 @pytest.mark.parametrize("cities, date_range, interests, expected_output", [
@@ -35,9 +35,11 @@ def test_crew(cities, date_range, interests, expected_output):
     t_crew = TripCrew(cities, date_range, interests)
     response = t_crew.run()
 
-    model = ChatOllama(model="mistral")
+    model = ChatOpenAI()
     expected_response = f"Is the context in {response} a detailed travel plan for a trip to one of the cities in the list provided `{cities}`. Response should be YES or NO. Remember to capitalize the answer"
-    chain = expected_response | model
+    model_response = model.invoke(expected_response)
 
-    assert chain == expected_output
+    model_eval = model_response.content
+
+    assert model_eval == expected_output
 

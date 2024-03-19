@@ -9,8 +9,7 @@ class TripTasks():
         return "If you do your BEST WORK, I'll tip you $100!"
 
     def identify_task(self, agent, origin, cities, interests, range):
-        return Task(
-            description=dedent(f"""
+        return Task(description=dedent(f"""
                                Analyze and select the best city for the trip based on specific criteria
                                such as weather patterns, seasonal events and travel costs. This task
                                involves comparing multiple cities, considering factors like current weather
@@ -24,7 +23,7 @@ class TripTasks():
                                Trip Date: {range}
                                Traveler Interests: {interests}
                                """
-                               )
+                               ),
             agent=agent,
             async_execution=True,
 

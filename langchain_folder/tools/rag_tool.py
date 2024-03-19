@@ -9,6 +9,9 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores.docarray import DocArrayInMemorySearch
 from langchain.chains import RetrievalQA
 
+
+
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -16,11 +19,11 @@ openai.api_key = os.environ.get('OPENAI_API_KEY')
 api_key = os.getenv('OPENAI_API_KEY')
 
 
-class RagTool(BaseModel):
+class RagToolOne(BaseModel):
     query: str = Field(description = "This should be a search query")
 
 
-@tool("rag-tool-one", args_schema=RagTool, return_direct=False)
+@tool("rag-tool-one", args_schema=RagToolOne, return_direct=False)
 def rag_one(query: str) -> str:
     """A tool that retrieves contents that are semantically relevant to the input query from the provided document.
 
@@ -30,20 +33,24 @@ def rag_one(query: str) -> str:
     Returns:
         str: top k amount of retrieved content from the uploaded document. content that are semantically similar to the input query.
     """
-    pdf_file_path = #'/content/data/cover_docs.pdf'
+    try:
+        pdf_file_path = ''
+  
+        loader = PyPDFLoader(pdf_file_path)
+        pages = loader.load_and_split()
 
-    loader = PyPDFLoader(pdf_file_path)
-    pages = loader.load_and_split()
+        text_splitter = RecursiveCharacterTextSplitter()
+        splits = text_splitter.split_documents(pages)
 
-    text_splitter = RecursiveCharacterTextSplitter()
-    splits = text_splitter.split_documents(pages)
+        embedding = OpenAIEmbeddings(api_key = api_key)
 
-    embedding = OpenAIEmbeddings(api_key = api_key)
+        vectordb = DocArrayInMemorySearch.from_documents(splits, embedding)
 
-    vectordb = DocArrayInMemorySearch.from_documents(splits, embedding)
-
-    results = vectordb.similarity_search(query, k = 4 )
-    result_string = "\n\n".join(str(result) for result in results)
+        results = vectordb.similarity_search(query, k = 4 )
+        result_string = "\n\n".join(str(result) for result in results)
+      
+    except FileNotFoundError:
+      result_string = ""
 
     return result_string
 
@@ -51,8 +58,11 @@ def rag_one(query: str) -> str:
 
 
 """The second RAG tool"""
+class RagToolTwo(BaseModel):
+    query: str = Field(description = "This should be a search query")
 
-@tool("rag-tool-two", args_schema=RagTool, return_direct=False)
+
+@tool("rag-tool-two", args_schema=RagToolTwo, return_direct=False)
 def rag_two(query: str) -> str:
     """A tool that retrieves contents that are semantically relevant to the input query from the provided document.
 
@@ -62,19 +72,22 @@ def rag_two(query: str) -> str:
     Returns:
         str: top k amount of retrieved content from the uploaded document. content that are semantically similar to the input query.
     """
-    pdf_file_path = #'/content/data/ptdf_sop.pdf'
+    try:
+        pdf_file_path = ''
 
-    loader = PyPDFLoader(pdf_file_path)
-    pages = loader.load_and_split()
+        loader = PyPDFLoader(pdf_file_path)
+        pages = loader.load_and_split()
 
-    text_splitter = RecursiveCharacterTextSplitter()
-    splits = text_splitter.split_documents(pages)
+        text_splitter = RecursiveCharacterTextSplitter()
+        splits = text_splitter.split_documents(pages)
 
-    embedding = OpenAIEmbeddings(api_key = api_key)
+        embedding = OpenAIEmbeddings(api_key = api_key)
 
-    vectordb = DocArrayInMemorySearch.from_documents(splits, embedding)
+        vectordb = DocArrayInMemorySearch.from_documents(splits, embedding)
 
-    results = vectordb.similarity_search(query, k = 4 )
-    result_string = "\n\n".join(str(result) for result in results)
+        results = vectordb.similarity_search(query, k = 4 )
+        result_string = "\n\n".join(str(result) for result in results)
+    except FileNotFoundError:
+        result_string = ""
 
     return result_string

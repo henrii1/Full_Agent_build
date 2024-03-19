@@ -63,28 +63,30 @@ class TripCrew:
     
 
 if __name__ == "__main__":
-    print("## Welcom to Trip Planner Crew")
-    print("------------------------------")
-    location = input(
-        dedent(""" Where will you be travelling from?""")
-    )
-    cities = input(
-        dedent('''What are cities are you interested in visiting?''')
-    )
-    date_range = input(
-        dedent('''What is the date range you are interested in traveling?''')
-    )
-    interests = input(
-        dedent('''What are some of your high level interests and hobbies?''')
-    )
+    import streamlit as st
 
-    trip_crew = TripCrew(origin=location, cities=cities, date_range=date_range, interests=interests)
-    result = trip_crew.run()
+    st.title("Trip Planner Crew!!")
+    st.write("""Input a location, a list of cities you have in mind, your proposed
+                travel date and you interests. Watch this agent plan a costed trip for you""")
 
-    print("\n\n ###################")
-    print("## Here is your Trip Plan")
-    print("##########################")
-    print(result)
+    location = st.text_area("Enter you location")
+    cities = st.text_area("Enter the lis of cities you intend to visit")
+    date_range = st.text_area("Enter the proposed data range for the trip")
+    interests = st.text_area("Enter a list of things you're interested in or hope to do during the trip")
+
+    if st.sidebar.button("Build a plan"):
+        with st.spinner(text = "Generating"):
+            trip_crew = TripCrew(
+                origin = location,
+                cities = cities,
+                date_range = date_range,
+                interests = interests
+            )
+            result = trip_crew.run()
+            st.markdown(result)
+
+
+
 
 
 

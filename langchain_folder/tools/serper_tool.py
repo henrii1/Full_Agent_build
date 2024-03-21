@@ -15,7 +15,7 @@ class SerperTool(BaseModel):
 
 @tool("serper_tool_main", args_schema=SerperTool, return_direct=False)
 def serper_tool(query:str) -> str:
-  """A useful for when you need to ask with search. Very useful when recent or specific information is needed from the web 
+  """A useful for when you need to ask with search. Very useful when recent or specific information is needed from the web
   """
   search = GoogleSerperAPIWrapper(k=4, type="search")
   initial_result = search.results(query)

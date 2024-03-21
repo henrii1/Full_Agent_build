@@ -1,5 +1,8 @@
+import os
+
 from crewai import Crew, Process
 from textwrap import dedent
+from langchain_openai.chat_models import ChatOpenAI
 from langchain_community.chat_models import ChatOllama
 from trip_agents import TripAgents
 from trip_task import TripTasks
@@ -7,6 +10,7 @@ from trip_task import TripTasks
 from dotenv import load_dotenv
 load_dotenv()
 
+api_key = os.getenv("OPENAI_API_KEY")
 
 class TripCrew:
 
@@ -17,6 +21,7 @@ class TripCrew:
         self.date_range = date_range
         self.interests = interests
         self.mistral = ChatOllama(model="mistral")
+        self.openai = ChatOpenAI(api_key=api_key, temperature=0)
 
     def run(self):
         agents = TripAgents()
@@ -55,7 +60,7 @@ class TripCrew:
             agents=[city_selector_agent, local_expert_agent, travel_concierge_agent],
             tasks=[identify_task, gather_task, plan_task],
             process= Process.hierarchical,
-            manager_llm=self.mistral
+            manager_llm=self.openai
         )
 
         result = crew.kickoff()

@@ -31,8 +31,8 @@ class BrowserTools():
                 allow_delegation=False)
             task = Task(
                 agent = agent,
-                description=f"Analyze and summarize the content below, make sure to include the most relevant information in the summary.
-                return only the summary nothing else. \n\nCONTENT\n------------\n{chunk}"
+                description=f"""Analyze and summarize the content below, make sure to include the most relevant information in the summary.
+                return only the summary nothing else. \n\nCONTENT\n------------\n{chunk}"""
             )
             summary = task.execute()
             summaries.append(summary)

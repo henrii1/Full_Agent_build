@@ -30,7 +30,7 @@ class SearchTools():
                     string.append("\n".join([
                         f"Title: {result['title']}",
                         f"Link: {result['link']}",
-                        f"Snippet: {result["snippet"]}",
+                        f"""Snippet: {result["snippet"]}""",
                         "\n---------------------"
                     ]))
                 except KeyError:

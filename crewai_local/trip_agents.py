@@ -1,18 +1,25 @@
+import os
+
 from crewai import Agent
 from langchain_community.chat_models import ChatOllama
+from langchain_openai.chat_models import ChatOpenAI
 
 from tools.browser_tools import BrowserTools
 from tools.calculator_tools import CalculatorTools
 from tools.search_tools import SearchTools
-from langchain_folder.tools import serper_tool
+#from langchain_local.tools import serper_tool
 
+from dotenv import load_dotenv
+load_dotenv()
 
+api_key = os.getenv('OPENAI_API_KEY')
 
 class TripAgents():
 
     def __init__(self):
         self.mistral = ChatOllama(model="crewai-mistral")
         self.llama2 = ChatOllama(model="crewai-llama2")
+        self.openai = ChatOpenAI(api_key = api_key, temperature=0)
 
 
     def city_selection_agent(self):
@@ -22,13 +29,13 @@ class TripAgents():
             backstory="An expert in analyzing travel data to pick ideal destinations",
             tools = [
                 SearchTools.search_internet,
-                BrowserTools.scrape_and_summarize_website,
-                serper_tool.serper_tool
+                #BrowserTools.scrape_and_summarize_website,
+                #serper_tool.serper_tool
             ],
             verbose=False,
             allow_delegation=True,
             max_iter=15,
-            llm=self.mistral
+            llm=self.openai
         )
     
     def local_expert(self):
@@ -38,12 +45,12 @@ class TripAgents():
             backstory="A knowledgeable local guide with extensive information about the city, it's attractions and customs",
             tools = [
                 SearchTools.search_internet,
-                BrowserTools.scrape_and_summarize_website,
-                serper_tool.serper_tool
+                #BrowserTools.scrape_and_summarize_website,
+                #serper_tool.serper_tool
             ],
             verbose=False,
             allow_delegation=True,
-            llm = self.mistral
+            llm = self.openai
         )
     
     def travel_concierge(self):
@@ -53,11 +60,11 @@ class TripAgents():
             backstory="Specialist in travel planning and logistics with decades of experience",
             tools=[
                 SearchTools.search_internet,
-                BrowserTools.scrape_and_summarize_website,
-                serper_tool.serper_tool,
+                #BrowserTools.scrape_and_summarize_website,
+                #serper_tool.serper_tool,
                 CalculatorTools.calculate
-            ]
+            ],
             allow_delegation=True,
-            llm = self.mistral
+            llm = self.openai
 
         )

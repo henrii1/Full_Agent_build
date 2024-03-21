@@ -24,6 +24,7 @@ class TripTasks():
                                Traveler Interests: {interests}
                                """
                                ),
+            expected_output="identified tasks to be performed",
             agent=agent,
             async_execution=True,
 
@@ -49,7 +50,7 @@ class TripTasks():
                                        Traveling from: {origin}
                                        Traveler Interests: {interests}
                                        """),
-
+                                        expected_output='list of possible tasks for a given location grouped together',
                                        agent=agent,
                                        context=context,
 
@@ -79,5 +80,7 @@ class TripTasks():
                                Traveler Interests: {interests}
                                """),
                                agent = agent,
+                               expected_output="A detailed plan of the activities to be carried out",
                                context = context
         )
+

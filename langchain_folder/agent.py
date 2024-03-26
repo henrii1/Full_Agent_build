@@ -65,7 +65,7 @@ def main():
             
     if st.button("Ask Question"):
         with st.spinner(text="Generating"):
-            response = generate(texts)
+            response = generate_langchain(texts)
             st.markdown(response)
 
 
@@ -148,7 +148,7 @@ tools = [rag_one, rag_two, serper_tool]
 model = ChatOpenAI(temperature= 0, api_key = api_key).bind_tools(tools=tools)
 
 
-def generate(query: str):
+def generate_langchain(query: str):
         """Function for interracting with the AI Agent"""
 
         prompt = ChatPromptTemplate.from_messages([

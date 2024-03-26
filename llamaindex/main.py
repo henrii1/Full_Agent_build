@@ -25,7 +25,7 @@ os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 Settings.llm = OpenAI(model="gpt-3.5-turbo-1106", temperature=0.2)
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
 
-def generate(query: str, data_dir: str) -> str:
+def generate_llamaindex(query: str, data_dir: str) -> str:
     """main function"""
     document_dir = data_dir
     documents = SimpleDirectoryReader(document_dir).load_data()

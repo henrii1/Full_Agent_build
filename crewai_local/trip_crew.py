@@ -14,14 +14,14 @@ api_key = os.getenv("OPENAI_API_KEY")
 
 class TripCrew:
 
-    def __init__(self, origin, cities, date_range, interests):
+    def __init__(self, origin, cities, date_range, interests, openai_api_key):
         
         self.origin = origin
         self.cities = cities
         self.date_range = date_range
         self.interests = interests
         self.mistral = ChatOllama(model="mistral")
-        self.openai = ChatOpenAI(api_key=api_key, temperature=0)
+        self.openai = ChatOpenAI(api_key=openai_api_key, temperature=0)
 
     def run(self):
         agents = TripAgents()
@@ -59,7 +59,7 @@ class TripCrew:
         crew = Crew(
             agents=[city_selector_agent, local_expert_agent, travel_concierge_agent],
             tasks=[identify_task, gather_task, plan_task],
-            process= Process.hierarchical,
+            process= Process.sequential,
             manager_llm=self.openai
         )
 

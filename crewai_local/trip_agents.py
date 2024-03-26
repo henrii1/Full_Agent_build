@@ -7,7 +7,6 @@ from langchain_openai.chat_models import ChatOpenAI
 from tools.browser_tools import BrowserTools
 from tools.calculator_tools import CalculatorTools
 from tools.search_tools import SearchTools
-#from langchain_local.tools import serper_tool
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,7 +29,6 @@ class TripAgents():
             tools = [
                 SearchTools.search_internet,
                 #BrowserTools.scrape_and_summarize_website,
-                #serper_tool.serper_tool
             ],
             verbose=False,
             allow_delegation=True,
@@ -46,7 +44,6 @@ class TripAgents():
             tools = [
                 SearchTools.search_internet,
                 #BrowserTools.scrape_and_summarize_website,
-                #serper_tool.serper_tool
             ],
             verbose=False,
             allow_delegation=True,
@@ -61,7 +58,6 @@ class TripAgents():
             tools=[
                 SearchTools.search_internet,
                 #BrowserTools.scrape_and_summarize_website,
-                #serper_tool.serper_tool,
                 CalculatorTools.calculate
             ],
             allow_delegation=True,

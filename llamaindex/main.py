@@ -20,13 +20,14 @@ from llama_index.core.tools import QueryEngineTool, RetrieverTool
 from llama_index.core.query_engine import RouterQueryEngine
 from llama_index.core.selectors import LLMSingleSelector
 
-os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 
-Settings.llm = OpenAI(model="gpt-3.5-turbo-1106", temperature=0.2)
-Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
 
-def generate_llamaindex(query: str, data_dir: str) -> str:
+
+def generate_llamaindex(query: str, data_dir: str, openai_api_key: str) -> str:
     """main function"""
+    Settings.llm = OpenAI(model="gpt-3.5-turbo-1106", temperature=0.2, api_key=openai_api_key)
+    Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small", api_key=openai_api_key)
+
     document_dir = data_dir
     documents = SimpleDirectoryReader(document_dir).load_data()
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>File Upload and API Keys</title>
+        {% include 'bootstrap.html' %}
+    </head>
+    <body>
+        {% include 'nav.html' %}
+    <div class="container">
+            <h3 class="text-center mt-2 mb-4">
+                Upload Files
+            </h3>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+
+        <form action="/agents/file_api_key" method="post">
+            <div class="col-6">
+                <label for="formFileLg" class="form-label">Upload One</label>
+                <input class="form-control form-control-lg" name="file_one" id="formFileLg" type="file">
+              </div>
+              <div class="col-6">
+                <label for="formFileLg" class="form-label">Upload Two</label>
+                <input class="form-control form-control-lg" name="file_two" id="formFileLg" type="file">
+              </div>
+
+              <h3 class="text-center mt-2 mb-4">
+                API Keys
+            </h3>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">OpenAI API Key</label>
+                <input type="text" class="form-control" required name="openai_api_key" id="exampleFormControlInput1" placeholder="sk-...">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Serper API Key</label>
+                <input type="text" class="form-control" name="serper_api_key" id="exampleFormControlInput1" placeholder="9864...">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Browserless API Key</label>
+                <input type="text" class="form-control" name="browserless_api_key" id="exampleFormControlInput1" placeholder="989dd...">
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary mb-3">Submit</button>
+              </div>
+            </form> 
+        {% include 'footer.html' %} 
+     </div>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+ </body>
+</html>

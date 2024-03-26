@@ -4,8 +4,8 @@ from crewai import Crew, Process
 from textwrap import dedent
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_community.chat_models import ChatOllama
-from trip_agents import TripAgents
-from trip_task import TripTasks
+from crewai_local.trip_agents import TripAgents
+from crewai_local.trip_task import TripTasks
 
 from dotenv import load_dotenv
 load_dotenv()

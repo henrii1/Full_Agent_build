@@ -6,21 +6,39 @@
     </head>
     <body>
         {% include 'nav.html' %}
+        {% include 'img.html' %}
         <div class="container">
             <h2 class="text-center mt-2 mb-4">
-                CrewAI Trip Planner
+                Langchain Multi-tool Agent
             </h2>
-            <p class="lead">Make sure to have inputed your OpenAI API Key</p>
-            <form action="/agents/langchain" method="post">
+            <p class="lead">Make sure to have inputed your OpenAI API Key. Also inpute Serper and Browserless API Keys</p>
+            <form action="/agents/crewai" method="post">
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Chat With Your Data</label>
-                    <textarea class="form-control" name="text_input" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <label for="exampleFormControlTextarea1" class="form-label">Enter you base location</label>
+                    <textarea class="form-control" required name="location" id="exampleFormControlTextarea1" rows="1"></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Enter the cities you want the agent to choose from</label>
+                    <textarea class="form-control" required name="cities" id="exampleFormControlTextarea1" rows="2"></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Enter your proposed date range for the trip</label>
+                    <textarea class="form-control" required name="date_range" id="exampleFormControlTextarea1" rows="2"></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Enter activities that interest you during trips</label>
+                    <textarea class="form-control" required name="interests" id="exampleFormControlTextarea1" rows="2"></textarea>
                   </div>
                   <div>
-                    <button type="submit" class="btn btn-primary mb-3">Chat</button>
+                    <button type="submit" class="btn btn-primary mb-3">Generate</button>
                   </div>   
             </form>
+
             <p class="lead">{{generated}}</p>
+
         </div> 
         {% include 'footer.html' %} 
      </div>

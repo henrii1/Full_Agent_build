@@ -4,9 +4,9 @@ from crewai import Agent
 from langchain_community.chat_models import ChatOllama
 from langchain_openai.chat_models import ChatOpenAI
 
-from tools.browser_tools import BrowserTools
-from tools.calculator_tools import CalculatorTools
-from tools.search_tools import SearchTools
+from crewai_local.tools.browser_tools import BrowserTools
+from crewai_local.tools.calculator_tools import CalculatorTools
+from crewai_local.tools.search_tools import SearchTools
 
 from dotenv import load_dotenv
 load_dotenv()

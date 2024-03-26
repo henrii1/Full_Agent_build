@@ -1,7 +1,6 @@
 import os
 import tempfile
 
-
 def api_keys(openai_api_key: str = None, serper_api_key: str | None= None, 
                 browserless_api_key: str | None = None ) -> dict:
     api_keys = {
@@ -10,7 +9,6 @@ def api_keys(openai_api_key: str = None, serper_api_key: str | None= None,
         "BROWSERLESS_API_KEY": browserless_api_key if browserless_api_key else ""
     }
     return api_keys
-
 
 def uploaded_files(upload_one=None, upload_two=None) -> list:
     temp_dir = tempfile.mkdtemp()

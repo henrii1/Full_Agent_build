@@ -27,6 +27,8 @@ chainlit = "^1.0.401"
 unstructured = "^0.11.0"
 streamlit = "^1.32.2"
 reportlab = "^4.1.0"
+flask = "^3.0.2"
+gunicorn = "^21.2.0"
 
 
 [tool.pyright]

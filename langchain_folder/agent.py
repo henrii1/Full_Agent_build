@@ -35,6 +35,9 @@ class SerperTool(BaseModel):
   query: str = Field(description = "This should be a search query")
 
 
+
+"""refactor this class. you can't associate decorators with class methods"""
+  
 class langchain_agent:
     def __init__(self, openai_api_key: str,
                 serper_api_key: str,
@@ -198,5 +201,6 @@ if __name__ =="__main__":
     import streamlit as st
 
     main()
+
 
 

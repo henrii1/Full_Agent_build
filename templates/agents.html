@@ -20,7 +20,9 @@
                     <button type="submit" class="btn btn-primary mb-3">Chat</button>
                   </div>   
             </form>
-            <p class="lead">{{generated}}</p>
+            {% for paragraph in generated.split('\n\n') %}
+            <p class="lead">{{ paragraph }}</p>
+            {% endfor %}
         </div> 
         {% include 'footer.html' %} 
      </div>

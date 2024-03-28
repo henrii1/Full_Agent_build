@@ -8,11 +8,14 @@
         {% include 'nav.html' %}
         {% include 'img.html' %}
         <div class="container">
+    
             <h2 class="text-center mt-2 mb-4">
                 Response
             </h2>
            
-            <p class="lead">{{generated}}</p>
+            {% for paragraph in generated.split('\n\n') %}
+            <p class="lead">{{ paragraph }}</p>
+            {% endfor %}
 
             <div class="col-3" style="padding-right: 16px; display: flex; justify-content: center; align-items: center;">
                 <a href="/agents/crewai" type="button" class="btn btn-outline-primary">Return to page</a>
